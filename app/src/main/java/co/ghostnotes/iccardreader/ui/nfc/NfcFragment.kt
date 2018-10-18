@@ -28,20 +28,10 @@ import java.lang.RuntimeException
 class NfcFragment : Fragment(), NfcContract.View {
 
     companion object {
-        //private const val DATA_TYPE_TEXT_PLAIN = "text/plain"
-        //private const val DATA_TYPE_APPLICATION = "application/co.ghostnotes.iccardreader"
-
-        //private const val PENDING_INTENT_REQUEST_CODE = 1
-
         const val FRAGMENT_TAG = "co.ghostnotes.iccardreader.ui.main.NfcFragment"
 
         fun newInstance() = NfcFragment()
     }
-
-    //private var nfcAdapter: NfcAdapter? = null
-    //private lateinit var nfcPendingIntent: PendingIntent
-    //private lateinit var readTagFilters: Array<IntentFilter>
-    //private val techLists: Array<Array<String>> = arrayOf(arrayOf(NfcF::class.java.name))
 
     private lateinit var viewModel: NfcViewModel
 
@@ -57,66 +47,12 @@ class NfcFragment : Fragment(), NfcContract.View {
 
         viewModel = ViewModelProviders.of(this).get(NfcViewModel::class.java)
         // TODO: Use the ViewModel
-
-        /*
-        nfcAdapter = NfcAdapter.getDefaultAdapter(activity!!.applicationContext)
-        if (nfcAdapter == null) {
-            showMessageAndFinish(R.string.error_message_nfc_is_not_available)
-            return
-        }
-
-        if (!isNfcEnabled()) {
-            showNfcEnableDialog()
-            return
-        }
-
-
-        val intent = Intent(activity, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        nfcPendingIntent = PendingIntent.getActivity(context, PENDING_INTENT_REQUEST_CODE, intent, 0)
-
-        val ndefDiscovered = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED)
-
-        try {
-            ndefDiscovered.addDataType(DATA_TYPE_APPLICATION)
-        } catch (e: IntentFilter.MalformedMimeTypeException) {
-            Timber.e(e)
-            // TODO
-            throw RuntimeException(e)
-        }
-
-        readTagFilters = arrayOf(ndefDiscovered)
-        */
     }
-
-    /*
-    override fun onResume() {
-        super.onResume()
-        Timber.d("### on resume.")
-
-        if (this::nfcPendingIntent.isInitialized) {
-            nfcAdapter!!.enableForegroundDispatch(activity, nfcPendingIntent, readTagFilters, techLists)
-            Timber.d("### NFCAdapter enables the foreground dispatch.")
-        }
-    }
-    */
-
-    /*
-    override fun onPause() {
-        Timber.d("### on pause.")
-        super.onPause()
-
-        nfcAdapter?.disableForegroundDispatch(activity)
-    }
-    */
-
-
 
     override fun showNfcEnableDialog() {
         val dialog = NfcNeedsToBeEnabledDialogFragment.newInstance()
-        dialog.show(activity!!.supportFragmentManager, "NfcNeedsToBeEnabledDialogFragment")
+        dialog.show(activity!!.supportFragmentManager, NfcNeedsToBeEnabledDialogFragment::class.java.simpleName)
     }
-
-    //private fun isNfcEnabled(): Boolean = nfcAdapter!!.isEnabled
 
     private fun showToast(@StringRes resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
