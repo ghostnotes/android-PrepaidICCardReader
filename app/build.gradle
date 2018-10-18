@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def APPLICATION_ID = "co.ghostnotes.iccardreader"
+def VERSION_CODE = 1
+def VERSION_NAME = "0.0.1"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId APPLICATION_ID
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "com.android.support:appcompat-v7:$appcompatVersion"
+    implementation "com.android.support:design:$appcompatVersion"
+    implementation "com.android.support:support-annotations:$appcompatVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+
+    // Test
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+}

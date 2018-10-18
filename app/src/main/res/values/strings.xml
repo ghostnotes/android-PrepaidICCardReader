@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Prepaid IC Card Reader</string>
+
+    <string name="message_please_enable_nfc">Do you want to enable NFC, please?</string>
+
+    <string name="error_message_nfc_is_not_available">NFC is not available.</string>
+    <string name="error_message_nfc_is_not_enabled">NFC is not enabled.</string>
+
+</resources>
